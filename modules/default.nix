@@ -1,0 +1,23 @@
+{
+  imports = [
+    ./boot.nix
+    ./auto_upgrades.nix
+    ./network.nix
+    ./logind.nix
+    ./base.nix
+    ./ntp.nix
+    ./thinkpad.nix
+    ./sound.nix
+    ./bluetooth.nix
+    ./ssh.nix
+    ./user_stephen.nix
+    ./sudoers.nix
+    ./derivation_build_server.nix
+    ./virtualisation.nix
+    ./fonts.nix
+    ./stephen_dev_env.nix
+    ./x_server.nix
+    ./gui_tools.nix
+    #./postgresql.nix
+  ];
+}

@@ -1,31 +1,18 @@
-let unstableTarball =
-  fetchTarball https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz;
-in
+# Run one of the following commands to get help:
+# - man 5 configuration.nix
+# - nixos-help (Opens https://nixos.org/nixos/manual in the browser.)
+
+{ config, pkgs, ...}:
+
 {
-  nixpkgs.config = {
-    packageOverrides = pkgs: {
-      unstable = import unstableTarball {
-        config = config.nixpkgs.config;
-      };
-    };
-  };
-
-  # Enable automatic upgrades (See: https://nixos.org/nixos/manual/index.html#sec-upgrading-automatic)
-  system.autoUpgrade.enable = true;
-  system.autoUpgrade.channel = https://nixos.org/channels/nixos-19.09;
-
-  environment.systemPackages = with pkgs; [
-    vim
-    unstable.neovim
-    git
-    python38
-    python2
-    python3
-    # rofi
+  imports = [
+    # hardware-configuration.nix is generated automatically by the hardware scan.
+    ./hardware-configuration.nix
+    ./conf.d/default.nix
   ];
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-
-  virtualisation.docker.enable = true;
+  # This value determines the NixOS release with which your system is to be compatible. In
+  # order to avoid breaking some software such as database servers, you should change this
+  # only after NixOS release notes say you should.
+  system.stateVersion = "19.09";  # Did you read the comment?
 }
